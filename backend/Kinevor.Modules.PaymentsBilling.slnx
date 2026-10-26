@@ -1,0 +1,12 @@
+<Solution>
+  <Folder Name="/samples/">
+    <Project Path="samples/Kinevor.Modules.PaymentsBilling.DemoApi/Kinevor.Modules.PaymentsBilling.DemoApi.csproj" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/Kinevor.Modules.PaymentsBilling.EntityFrameworkCore/Kinevor.Modules.PaymentsBilling.EntityFrameworkCore.csproj" />
+    <Project Path="src/Kinevor.Modules.PaymentsBilling/Kinevor.Modules.PaymentsBilling.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Kinevor.Modules.PaymentsBilling.Tests/Kinevor.Modules.PaymentsBilling.Tests.csproj" />
+  </Folder>
+</Solution>

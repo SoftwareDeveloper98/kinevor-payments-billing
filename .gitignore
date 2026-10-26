@@ -1,0 +1,52 @@
+# .NET
+**/bin/
+**/obj/
+**/artifacts/
+*.user
+*.suo
+.vs/
+TestResults/
+*.nupkg
+*.snupkg
+
+# Node / Angular
+**/node_modules/
+**/dist/
+**/.angular/
+coverage/
+playwright-report/
+test-results/
+*.tgz
+npm-debug.log*
+
+# Flutter / Dart
+**/.dart_tool/
+**/.flutter-plugins
+**/.flutter-plugins-dependencies
+**/build/
+**/.pub/
+**/.pub-cache/
+**/.packages
+**/coverage/
+**/.idea/
+**/*.iml
+
+# Local configuration and data
+.env
+.env.*
+!.env.example
+*.db
+*.db-shm
+*.db-wal
+*.sqlite
+*.sqlite3
+
+# OS and editors
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+
+# Large build artifacts (zip hygiene)
+*.pdb
+ephemeral/

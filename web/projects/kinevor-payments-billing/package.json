@@ -1,0 +1,37 @@
+{
+  "name": "@softwaredeveloper98/kinevor-payments-billing-web",
+  "version": "0.1.0",
+  "description": "Invoice, payment, refund and revenue UI for the Kinevor gym platform.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SoftwareDeveloper98/kinevor-payments-billing.git"
+  },
+  "keywords": [
+    "kinevor",
+    "angular",
+    "billing",
+    "invoices",
+    "payments",
+    "refunds"
+  ],
+  "peerDependencies": {
+    "@angular/common": "^21.0.0",
+    "@angular/core": "^21.0.0",
+    "@angular/forms": "^21.0.0",
+    "@angular/material": "^21.0.0",
+    "@angular/router": "^21.0.0",
+    "@softwaredeveloper98/kinevor-platform-web": "^0.1.0",
+    "rxjs": "^7.8.0"
+  },
+  "sideEffects": false,
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com",
+    "access": "restricted"
+  },
+  "author": "George Victor Kamal",
+  "homepage": "https://github.com/SoftwareDeveloper98/kinevor-payments-billing#readme",
+  "bugs": {
+    "url": "https://github.com/SoftwareDeveloper98/kinevor-payments-billing/issues"
+  }
+}

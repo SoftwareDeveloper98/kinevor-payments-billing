@@ -1,0 +1,233 @@
+﻿/* Generated from design/tokens.json by scripts/generate-tokens.mjs â€” do not edit by hand. */
+:root {
+  color-scheme: dark;
+
+  --font-sans: 'Sora', 'Inter', 'IBM Plex Sans Arabic', system-ui, sans-serif;
+  --font-arabic: 'IBM Plex Sans Arabic', 'Noto Sans Arabic', 'Sora', system-ui, sans-serif;
+
+  /* display â€” weight 800 */
+  --text-display: clamp(36px, 24.44px + 3.08vw, 56px);
+  --leading-display: 1.1;
+  /* h1 â€” weight 700 */
+  --text-h1: clamp(28px, 21.07px + 1.85vw, 40px);
+  --leading-h1: 1.2;
+  /* h2 â€” weight 700 */
+  --text-h2: clamp(22px, 18.53px + 0.92vw, 28px);
+  --leading-h2: 1.25;
+  /* h3 â€” weight 600 */
+  --text-h3: clamp(18px, 16.84px + 0.31vw, 20px);
+  --leading-h3: 1.3;
+  /* body â€” weight 400 */
+  --text-body: 16px;
+  --leading-body: 1.5;
+  /* small â€” weight 400 */
+  --text-small: clamp(13px, 12.42px + 0.15vw, 14px);
+  --leading-small: 1.45;
+  /* label â€” weight 600 */
+  --text-label: 14px;
+  --leading-label: 1.2;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 16px;
+  --space-4: 24px;
+  --space-5: 32px;
+  --space-6: 48px;
+  --space-7: 64px;
+
+  --radius-card: 20px;
+  --radius-input: 14px;
+  --radius-pill: 999px;
+  --radius-sheet: 28px;
+
+  --border-thin: 1px;
+  --border-focus: 2px;
+
+  --motion-fast: 150ms;
+  --motion-base: 250ms;
+  --motion-screen: 350ms;
+  --motion-ease: cubic-bezier(0.0, 0.0, 0.2, 1);
+
+  --touch-min: 44px;
+  --touch-gap: 8px;
+
+  --content-max: 1200px;
+  --section-y: 48px;
+
+  --button-height: 44px;
+  --input-height: 48px;
+
+  --measure: 68ch;
+
+  --color-cat-yoga: #AB47BC;
+  --color-cat-pilates: #42A5F5;
+  --color-cat-zumba: #FFCA28;
+  --color-cat-hiit: #EF5350;
+  --color-cat-spinning: #66BB6A;
+  --color-cat-boxing: #E65100;
+  --color-cat-crossfit: #FFA726;
+  --color-cat-aqua: #26C6DA;
+  --color-cat-bodypump: #EC407A;
+  --color-cat-kickboxing: #8D6E63;
+  --color-cat-stretching: #78909C;
+  --color-cat-meditation: #7E57C2;
+  --color-cat-default: #E65100;
+  --color-status-active: #81C784;
+  --color-status-frozen: #64B5F6;
+  --color-status-expired: #BDBDBD;
+  --color-status-pending: #FFA726;
+  --color-status-paid: #66BB6A;
+  --color-status-rating: #FFA726;
+  --color-chart-revenue: #FF7A00;
+  --color-chart-visits: #42A5F5;
+  --color-chart-members: #AB47BC;
+  --color-chart-checkins: #66BB6A;
+  --gradient-brand: linear-gradient(135deg, #A52C00 0%, #BF360C 100%);
+  --gradient-brandWarm: linear-gradient(135deg, #BF360C 0%, #FF7A00 100%);
+  --gradient-green: linear-gradient(135deg, #1B5E20 0%, #388E3C 100%);
+  --gradient-blue: linear-gradient(135deg, #0D3B74 0%, #1565C0 100%);
+  --gradient-purple: linear-gradient(135deg, #4A148C 0%, #7B1FA2 100%);
+  --gradient-red: linear-gradient(135deg, #B71C1C 0%, #D32F2F 100%);
+  --gradient-teal: linear-gradient(135deg, #004D40 0%, #00897B 100%);
+  --gradient-barRevenue: linear-gradient(to top, #BF360C, #FF7A00);
+  --gradient-barVisits: linear-gradient(to top, #0D3B74, #42A5F5);
+  --color-shade-deep: #000000;
+}
+
+@media (min-width: 1024px) {
+  :root { --section-y: 80px; }
+}
+
+/* â”€â”€ Theme: dark (default) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+:root,
+[data-theme='dark'] {
+  --color-bg: #111317;
+  --color-ink: #111317;
+  --color-surface: #16181D;
+  --color-surface-raised: #1E2127;
+  --color-border: #2A2E36;
+  --color-text: #F4F5F7;
+  --color-text-muted: #8E949E;
+  --color-accent: #FF453A;
+  --color-accent-fill: #FF453A;
+  --color-accent-text: #FF453A;
+  --color-accent-hover: #FF6A61;
+  --color-accent-pressed: #E0342A;
+  --color-on-accent: #FFFFFF;
+  --color-success: #34D399;
+  --color-warning: #FBBF24;
+  --color-error: #FF6B6B;
+  --color-info: #4DAEFF;
+  --color-accent-soft: rgba(255, 69, 58, 0.14);
+  --color-overlay: rgba(0, 0, 0, 0.6);
+  --shadow-card: none;
+}
+
+/* â”€â”€ Theme: light â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+[data-theme='light'] {
+  color-scheme: light;
+  --color-bg: #FFFFFF;
+  --color-ink: #111317;
+  --color-surface: #F5F5F7;
+  --color-surface-raised: #FFFFFF;
+  --color-border: #E5E5EA;
+  --color-text: #111317;
+  --color-text-muted: #5B6068;
+  --color-accent: #FF453A;
+  --color-accent-fill: #FF453A;
+  --color-accent-text: #C9261B;
+  --color-accent-hover: #E0342A;
+  --color-accent-pressed: #C9261B;
+  --color-on-accent: #FFFFFF;
+  --color-success: #1E9E56;
+  --color-warning: #B47F00;
+  --color-error: #D93A3D;
+  --color-info: #0B78D0;
+  --color-accent-soft: rgba(201, 38, 27, 0.1);
+  --color-overlay: rgba(18, 18, 20, 0.5);
+  --shadow-card: 0 1px 2px rgba(18, 18, 20, 0.06);
+}
+
+/* â”€â”€ Typography utilities â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+.t-display {
+  font-size: clamp(36px, 24.44px + 3.08vw, 56px);
+  line-height: 1.1;
+  font-weight: 800;
+  letter-spacing: normal;
+}
+.t-h1 {
+  font-size: clamp(28px, 21.07px + 1.85vw, 40px);
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: normal;
+}
+.t-h2 {
+  font-size: clamp(22px, 18.53px + 0.92vw, 28px);
+  line-height: 1.25;
+  font-weight: 700;
+  letter-spacing: normal;
+}
+.t-h3 {
+  font-size: clamp(18px, 16.84px + 0.31vw, 20px);
+  line-height: 1.3;
+  font-weight: 600;
+  letter-spacing: normal;
+}
+.t-body {
+  font-size: 16px;
+  line-height: 1.5;
+  font-weight: 400;
+  letter-spacing: normal;
+}
+.t-small {
+  font-size: clamp(13px, 12.42px + 0.15vw, 14px);
+  line-height: 1.45;
+  font-weight: 400;
+  letter-spacing: normal;
+}
+.t-label {
+  font-size: 14px;
+  line-height: 1.2;
+  font-weight: 600;
+  letter-spacing: normal; text-transform: none;
+}
+
+.tabular,
+[class*='price'],
+[class*='kpi-value'],
+[class*='stat-'],
+.row-time,
+.row-day,
+.spots,
+.days-num,
+.amount {
+  font-variant-numeric: tabular-nums;
+}
+
+html[lang='ar'] body,
+html[lang='ar'] .t-display,
+html[lang='ar'] h1,
+html[lang='ar'] h2,
+html[lang='ar'] h3,
+html[lang='ar'] h4 {
+  line-height: 1.65;
+  letter-spacing: normal;
+}
+
+html[lang='ar'] * {
+  letter-spacing: normal !important;
+  text-transform: none !important;
+}
+
+/* â”€â”€ Motion â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+    transform: none !important;
+  }
+}

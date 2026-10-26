@@ -1,0 +1,113 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+  packages: write
+
+env:
+  DOTNET_NOLOGO: true
+  DOTNET_CLI_TELEMETRY_OPTOUT: true
+  NUGET_TOKEN: ${{ secrets.KINEVOR_PACKAGES_TOKEN || secrets.GITHUB_TOKEN }}
+
+jobs:
+  nuget:
+    name: Publish NuGet
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: |
+            9.0.x
+            10.0.x
+      - name: Restore
+        run: |
+          cat > "$RUNNER_TEMP/nuget.ci.config" <<EOF
+          <?xml version="1.0" encoding="utf-8"?>
+          <configuration>
+            <packageSources>
+              <clear />
+              <add key="nuget.org" value="https://api.nuget.org/v3/index.json" />
+              <add key="github" value="https://nuget.pkg.github.com/SoftwareDeveloper98/index.json" />
+            </packageSources>
+            <packageSourceCredentials>
+              <github>
+                <add key="Username" value="SoftwareDeveloper98" />
+                <add key="ClearTextPassword" value="${NUGET_TOKEN}" />
+              </github>
+            </packageSourceCredentials>
+          </configuration>
+          EOF
+          dotnet restore backend/Kinevor.Modules.PaymentsBilling.slnx \
+            --configfile "$RUNNER_TEMP/nuget.ci.config"
+      - name: Test
+        run: dotnet test backend/Kinevor.Modules.PaymentsBilling.slnx -c Release --no-restore
+      - name: Pack
+        run: |
+          dotnet pack backend/src/Kinevor.Modules.PaymentsBilling/Kinevor.Modules.PaymentsBilling.csproj \
+            -c Release --no-build -o backend/artifacts/packages
+          dotnet pack backend/src/Kinevor.Modules.PaymentsBilling.EntityFrameworkCore/Kinevor.Modules.PaymentsBilling.EntityFrameworkCore.csproj \
+            -c Release --no-build -o backend/artifacts/packages
+      - name: Push
+        run: >
+          dotnet nuget push "backend/artifacts/packages/*.nupkg"
+          --source "https://nuget.pkg.github.com/SoftwareDeveloper98/index.json"
+          --api-key "$NUGET_TOKEN" --skip-duplicate
+      - name: Push symbols
+        run: >
+          dotnet nuget push "backend/artifacts/packages/*.snupkg"
+          --source "https://nuget.pkg.github.com/SoftwareDeveloper98/index.json"
+          --api-key "$NUGET_TOKEN" --skip-duplicate
+
+  npm:
+    name: Publish npm
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: web
+    env:
+      NODE_AUTH_TOKEN: ${{ secrets.KINEVOR_PACKAGES_TOKEN || secrets.GITHUB_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Authenticate GitHub Packages
+        run: npm config set //npm.pkg.github.com/:_authToken "$NODE_AUTH_TOKEN"
+      - name: Install
+        run: npm install --no-audit --no-fund
+      - name: Test
+        run: npm test
+      - name: Build
+        run: npm run build
+      - name: Publish
+        run: >
+          npm publish ./dist/kinevor-payments-billing
+          --registry=https://npm.pkg.github.com --access restricted
+
+  mobile:
+    name: Publish Flutter source
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Archive package
+        run: >
+          tar --exclude-vcs --exclude=.dart_tool --exclude=.flutter-plugins
+          --exclude=.flutter-plugins-dependencies --exclude=.plugin_symlinks
+          --exclude=ephemeral --exclude=build -czf
+          kinevor_payments_billing-0.1.0.tar.gz -C mobile/packages kinevor_payments_billing
+      - name: Checksum
+        run: >
+          sha256sum kinevor_payments_billing-0.1.0.tar.gz >
+          kinevor_payments_billing-0.1.0.tar.gz.sha256
+      - uses: softprops/action-gh-release@v2
+        with:
+          generate_release_notes: true
+          files: |
+            kinevor_payments_billing-0.1.0.tar.gz
+            kinevor_payments_billing-0.1.0.tar.gz.sha256

@@ -1,0 +1,43 @@
+{
+  "name": "kinevor-payments-billing-web-workspace",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "ng": "ng",
+    "build": "ng build kinevor-payments-billing",
+    "start": "ng serve demo",
+    "build:demo": "ng build demo",
+    "build:all": "npm run build && npm run build:demo",
+    "test": "ng test kinevor-payments-billing --watch=false",
+    "test:watch": "ng test kinevor-payments-billing",
+    "install:local": "node scripts/install-local-platform.mjs",
+    "capture:screenshots": "node scripts/capture-screenshots.mjs"
+  },
+  "dependencies": {
+    "@angular/animations": "^21.0.0",
+    "@angular/cdk": "^21.0.0",
+    "@angular/common": "^21.0.0",
+    "@angular/compiler": "^21.0.0",
+    "@angular/core": "^21.0.0",
+    "@angular/forms": "^21.0.0",
+    "@angular/material": "^21.0.0",
+    "@angular/platform-browser": "^21.0.0",
+    "@angular/platform-browser-dynamic": "^21.0.0",
+    "@angular/router": "^21.0.0",
+    "@softwaredeveloper98/kinevor-platform-web": "^0.1.0",
+    "material-icons": "^1.13.14",
+    "rxjs": "~7.8.0",
+    "tslib": "^2.6.0",
+    "zone.js": "~0.15.0"
+  },
+  "devDependencies": {
+    "@angular/build": "^21.0.0",
+    "@angular/cli": "^21.0.0",
+    "@angular/compiler-cli": "^21.0.0",
+    "jsdom": "^30.1.3",
+    "ng-packagr": "^21.0.0",
+    "playwright": "^1.64.1",
+    "typescript": "~5.9.0",
+    "vitest": "^4.1.12"
+  }
+}

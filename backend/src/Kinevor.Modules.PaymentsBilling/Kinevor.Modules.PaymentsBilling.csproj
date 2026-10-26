@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <PackageId>Kinevor.Modules.PaymentsBilling</PackageId>
+    <Description>Payments and billing module for Kinevor: invoices, payments, refunds and revenue reporting.</Description>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    <None Include="README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Kinevor.Platform.Api" Version="0.1.0" />
+    <PackageReference Include="Kinevor.Platform.Application" Version="0.1.0" />
+    <PackageReference Include="Kinevor.Platform.Domain" Version="0.1.0" />
+    <PackageReference Include="MediatR" Version="12.4.1" />
+  </ItemGroup>
+</Project>

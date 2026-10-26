@@ -1,0 +1,112 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+  packages: read
+
+env:
+  DOTNET_NOLOGO: true
+  DOTNET_CLI_TELEMETRY_OPTOUT: true
+  NUGET_TOKEN: ${{ secrets.KINEVOR_PACKAGES_TOKEN || secrets.GITHUB_TOKEN }}
+
+jobs:
+  backend:
+    name: Backend
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: |
+            9.0.x
+            10.0.x
+      - name: Restore
+        run: |
+          cat > "$RUNNER_TEMP/nuget.ci.config" <<EOF
+          <?xml version="1.0" encoding="utf-8"?>
+          <configuration>
+            <packageSources>
+              <clear />
+              <add key="nuget.org" value="https://api.nuget.org/v3/index.json" />
+              <add key="github" value="https://nuget.pkg.github.com/SoftwareDeveloper98/index.json" />
+            </packageSources>
+            <packageSourceCredentials>
+              <github>
+                <add key="Username" value="SoftwareDeveloper98" />
+                <add key="ClearTextPassword" value="${NUGET_TOKEN}" />
+              </github>
+            </packageSourceCredentials>
+          </configuration>
+          EOF
+          dotnet restore backend/Kinevor.Modules.PaymentsBilling.slnx \
+            --configfile "$RUNNER_TEMP/nuget.ci.config"
+      - name: Build
+        run: dotnet build backend/Kinevor.Modules.PaymentsBilling.slnx -c Release --no-restore
+      - name: Test
+        run: dotnet test backend/Kinevor.Modules.PaymentsBilling.slnx -c Release --no-build
+      - name: Pack
+        run: |
+          dotnet pack backend/src/Kinevor.Modules.PaymentsBilling/Kinevor.Modules.PaymentsBilling.csproj \
+            -c Release --no-build -o backend/artifacts/packages
+          dotnet pack backend/src/Kinevor.Modules.PaymentsBilling.EntityFrameworkCore/Kinevor.Modules.PaymentsBilling.EntityFrameworkCore.csproj \
+            -c Release --no-build -o backend/artifacts/packages
+      - uses: actions/upload-artifact@v4
+        with:
+          name: nuget-packages
+          path: backend/artifacts/packages/*.nupkg
+
+  web:
+    name: Web
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: web
+    env:
+      NODE_AUTH_TOKEN: ${{ secrets.KINEVOR_PACKAGES_TOKEN || secrets.GITHUB_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Authenticate GitHub Packages
+        run: npm config set //npm.pkg.github.com/:_authToken "$NODE_AUTH_TOKEN"
+      - name: Install
+        run: npm install --no-audit --no-fund
+      - name: Build library
+        run: npm run build
+      - name: Test
+        run: npm test
+      - name: Build demo
+        run: npm run build:demo
+      - uses: actions/upload-artifact@v4
+        with:
+          name: npm-package
+          path: web/dist/kinevor-payments-billing
+
+  mobile:
+    name: Flutter
+    runs-on: windows-latest
+    defaults:
+      run:
+        working-directory: mobile/packages/kinevor_payments_billing
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          flutter-version: 3.47.7
+          cache: true
+      - name: Install
+        run: flutter pub get
+      - name: Format
+        run: dart format --output=none --set-exit-if-changed lib test example/lib
+      - name: Analyze
+        run: flutter analyze
+      - name: Test
+        run: flutter test
